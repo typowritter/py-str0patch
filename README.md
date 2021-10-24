@@ -6,14 +6,22 @@ libraries).
 
 Needs a relatively recent Python 3 version.
 
-License is BSD0.  Do whatever you want with the script as long as I'm not involved.
+License is BSD0. Original credits to https://git.csrd.science/nosoop/py-str0patch
 
 ## Usage
 
-Copy `str0.example.ini` to `str0.ini`, add your sections, then run `python3 str0.py ${FILE}` to
-shut those "RecordSteamInterfaceCreation" messages up for good.
+Run `python3 str0.py ${FILE}` to shut those "RecordSteamInterfaceCreation" messages up for good.
 
 Additional configuration files may be provided by passing `-c ${CONFIGFILE}` to the script.
+You can add your sections following the syntax of `str0.ini`
+
+Here is a useful bash snippet to spot the string you want to patch:
+
+```bash
+find -name "*.so" -exec sh -c "strings {} | grep -E '<ADD your strings here>'" \;
+```
+
+**NOTE**: The patch process is *NOT* whole string matching, so don't write a partial string, as this may corrupt the file.
 
 ## Dealing with autoupdates
 

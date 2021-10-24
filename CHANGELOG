@@ -1,0 +1,10 @@
+# Changelog
+
+Code from the original author: [commit 372a542](https://github.com/typowritter/py-str0patch/tree/372a542431f76d636cc9f14568d847a5b079da16)
+
+- Add support for specifying multiple binaries
+- Add support for inputing from a file list
+- Patch all matching strings instead of only the first one
+- Fix bug that can't find config file from the current directory
+- Change default value of `fully_zero` to `True`
+- Add patch rules for Left 4 Dead 2
