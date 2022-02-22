@@ -1,0 +1,7 @@
+gamedir/bin/engine_srv.so
+gamedir/bin/crashhandler.so
+gamedir/bin/dedicated_srv.so
+gamedir/bin/libsteam_api.so
+gamedir/bin/steamclient.so
+gamedir/left4dead2/bin/matchmaking_ds_srv.so
+gamedir/left4dead2/bin/server_srv.so

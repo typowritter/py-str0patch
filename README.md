@@ -21,7 +21,7 @@ Here is a useful bash snippet to spot the string you want to patch:
 find -name "*.so" -exec sh -c "strings {} | grep -E '<ADD your strings here>'" \;
 ```
 
-**NOTE**: The patch process is *NOT* whole string matching, so don't write a partial string, as this may corrupt the file.
+**NOTE**: The patch process is *NOT* whole string matching, so don't write a vague string, as this may corrupt the file.
 
 ## Dealing with autoupdates
 
