@@ -15,16 +15,19 @@ import configparser
 import mmap
 import os
 
-def patch_to_null(mbin, target, fully_zero):
+def patch_to_null(mbin, target, fully_zero, fully_space):
 	patched = 0
 	while True:
 		mbin.seek(0)
-		offset = mbin.find(target.encode('ascii'))
+		offset = mbin.find(target)
 		if offset == -1:
 			return patched
 		mbin.seek(offset)
-		# read up to the next null terminator and zero out the range if we fullclear it
-		mbin.write(b'\0' * (mbin.find(b'\0', offset) - offset if fully_zero else 1))
+		if fully_space:
+			mbin.write(b' ' * len(target))
+		else:
+			# read up to the next null terminator and zero out the range if we fullclear it
+			mbin.write(b'\0' * (mbin.find(b'\0', offset) - offset if fully_zero else 1))
 		patched += 1
 
 if __name__ == '__main__':
@@ -60,6 +63,7 @@ if __name__ == '__main__':
 
 		for target in config.getpyliteral(os.path.basename(binary.name), "strings"):
 			fully_zero = config.getboolean(os.path.basename(binary.name), "fully_zero", fallback = True)
-			if patch_to_null(mbin, target, fully_zero) < 1:
+			fully_space = config.getboolean(os.path.basename(binary.name), "fully_space", fallback = False)
+			if patch_to_null(mbin, target.encode('ascii'), fully_zero, fully_space) < 1:
 				print(f'{binary.name}: Failed to locate string "{target}"')
 		mbin.close()
